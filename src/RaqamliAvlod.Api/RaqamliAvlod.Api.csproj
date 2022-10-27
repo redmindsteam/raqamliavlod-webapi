@@ -12,11 +12,14 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Serilog.AspNetCore" Version="6.0.1" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+    <PackageReference Include="Serilog.Sinks.TelegramBot" Version="1.0.9" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RaqamliAvlod.Service\RaqamliAvlod.Service.csproj" />
+    <ProjectReference Include="..\..\RaqamliAvlod.Infrastructure.Service\RaqamliAvlod.Infrastructure.Service.csproj" />
   </ItemGroup>
 
 </Project>

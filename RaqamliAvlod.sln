@@ -15,11 +15,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RaqamliAvlod.Application", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RaqamliAvlod.DataAccess", "src\RaqamliAvlod.DataAccess\RaqamliAvlod.DataAccess.csproj", "{66620BEE-398C-4805-A527-9C1CA7AA7E86}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RaqamliAvlod.Service", "src\RaqamliAvlod.Service\RaqamliAvlod.Service.csproj", "{BCEE43AA-A7DB-47F4-B771-9C827C5FE257}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RaqamliAvlod.UnitTest", "test\RaqamliAvlod.UnitTest\RaqamliAvlod.UnitTest.csproj", "{851E67BC-8F6F-4CFF-B6C2-08210ED95635}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RaqamliAvlod.IntegrationTest", "test\RaqamliAvlod.IntegrationTest\RaqamliAvlod.IntegrationTest.csproj", "{9DACA4E5-3C1D-47B8-B23E-4908EC800E45}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaqamliAvlod.Infrastructure.Core", "RaqamliAvlod.Infrastructure.Mechanizm\RaqamliAvlod.Infrastructure.Core.csproj", "{89941065-73E2-4F6D-A852-31D370DAE076}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaqamliAvlod.Infrastructure.Service", "RaqamliAvlod.Infrastructure.Service\RaqamliAvlod.Infrastructure.Service.csproj", "{23346801-2855-4E9B-90A1-1EF527E742AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,10 +45,6 @@ Global
 		{66620BEE-398C-4805-A527-9C1CA7AA7E86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66620BEE-398C-4805-A527-9C1CA7AA7E86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66620BEE-398C-4805-A527-9C1CA7AA7E86}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BCEE43AA-A7DB-47F4-B771-9C827C5FE257}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BCEE43AA-A7DB-47F4-B771-9C827C5FE257}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BCEE43AA-A7DB-47F4-B771-9C827C5FE257}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BCEE43AA-A7DB-47F4-B771-9C827C5FE257}.Release|Any CPU.Build.0 = Release|Any CPU
 		{851E67BC-8F6F-4CFF-B6C2-08210ED95635}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{851E67BC-8F6F-4CFF-B6C2-08210ED95635}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{851E67BC-8F6F-4CFF-B6C2-08210ED95635}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -55,6 +53,14 @@ Global
 		{9DACA4E5-3C1D-47B8-B23E-4908EC800E45}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9DACA4E5-3C1D-47B8-B23E-4908EC800E45}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9DACA4E5-3C1D-47B8-B23E-4908EC800E45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89941065-73E2-4F6D-A852-31D370DAE076}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89941065-73E2-4F6D-A852-31D370DAE076}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89941065-73E2-4F6D-A852-31D370DAE076}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89941065-73E2-4F6D-A852-31D370DAE076}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23346801-2855-4E9B-90A1-1EF527E742AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23346801-2855-4E9B-90A1-1EF527E742AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23346801-2855-4E9B-90A1-1EF527E742AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23346801-2855-4E9B-90A1-1EF527E742AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,9 +70,10 @@ Global
 		{26899A91-94A7-4E79-9247-A7BF89856289} = {55CE2710-415D-4A84-B678-80D9D0FA1D89}
 		{7CA900B4-6CFD-4A62-B3B3-0096FC3420DF} = {55CE2710-415D-4A84-B678-80D9D0FA1D89}
 		{66620BEE-398C-4805-A527-9C1CA7AA7E86} = {55CE2710-415D-4A84-B678-80D9D0FA1D89}
-		{BCEE43AA-A7DB-47F4-B771-9C827C5FE257} = {55CE2710-415D-4A84-B678-80D9D0FA1D89}
 		{851E67BC-8F6F-4CFF-B6C2-08210ED95635} = {DACFCFCE-47BF-4267-B46A-35432BD2AE24}
 		{9DACA4E5-3C1D-47B8-B23E-4908EC800E45} = {DACFCFCE-47BF-4267-B46A-35432BD2AE24}
+		{89941065-73E2-4F6D-A852-31D370DAE076} = {55CE2710-415D-4A84-B678-80D9D0FA1D89}
+		{23346801-2855-4E9B-90A1-1EF527E742AD} = {55CE2710-415D-4A84-B678-80D9D0FA1D89}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {77559A04-F95E-432C-B361-191485BE084F}
