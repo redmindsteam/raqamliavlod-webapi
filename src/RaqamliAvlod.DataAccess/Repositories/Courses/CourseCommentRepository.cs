@@ -12,9 +12,11 @@ namespace RaqamliAvlod.DataAccess.Repositories.Courses
         {
 
         }
-        public Task<PagedList<CourseComment>> GetAllByCourseIdAsync(long courseId, PaginationParams @params)
+        public async Task<PagedList<CourseComment>> GetAllByCourseIdAsync(long courseId, PaginationParams @params)
         {
-            throw new NotImplementedException();
+            var coursecomments = _dbSet.Where(courses => courses.CourseId == courseId);
+
+            return await PagedList<CourseComment>.ToPagedListAsync(coursecomments, @params.PageNumber, @params.PageSize);
         }
     }
 }
