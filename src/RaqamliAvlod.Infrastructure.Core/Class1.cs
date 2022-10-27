@@ -1,11 +1,7 @@
-﻿
-
-namespace RaqamliAvlod.Infrastructure.Mechanizm
+﻿namespace RaqamliAvlod.Infrastructure.Core
 {
     public class Class1
     {
-        public Class1()
-        {
-        }
+
     }
 }

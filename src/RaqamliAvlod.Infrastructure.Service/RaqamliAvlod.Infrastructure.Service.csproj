@@ -7,13 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\" />
-    <Folder Include="Security\" />
-    <Folder Include="Services\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\RaqamliAvlod.Infrastructure.Mechanizm\RaqamliAvlod.Infrastructure.Core.csproj" />
+    <ProjectReference Include="..\RaqamliAvlod.Infrastructure.Core\RaqamliAvlod.Infrastructure.Core.csproj" />
   </ItemGroup>
 
 </Project>
