@@ -19,9 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RaqamliAvlod.UnitTest", "te
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RaqamliAvlod.IntegrationTest", "test\RaqamliAvlod.IntegrationTest\RaqamliAvlod.IntegrationTest.csproj", "{9DACA4E5-3C1D-47B8-B23E-4908EC800E45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaqamliAvlod.Infrastructure.Core", "RaqamliAvlod.Infrastructure.Mechanizm\RaqamliAvlod.Infrastructure.Core.csproj", "{89941065-73E2-4F6D-A852-31D370DAE076}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaqamliAvlod.Infrastructure.Core", "src\RaqamliAvlod.Infrastructure.Mechanizm\RaqamliAvlod.Infrastructure.Core.csproj", "{89941065-73E2-4F6D-A852-31D370DAE076}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaqamliAvlod.Infrastructure.Service", "RaqamliAvlod.Infrastructure.Service\RaqamliAvlod.Infrastructure.Service.csproj", "{23346801-2855-4E9B-90A1-1EF527E742AD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaqamliAvlod.Infrastructure.Service", "src\RaqamliAvlod.Infrastructure.Service\RaqamliAvlod.Infrastructure.Service.csproj", "{23346801-2855-4E9B-90A1-1EF527E742AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
