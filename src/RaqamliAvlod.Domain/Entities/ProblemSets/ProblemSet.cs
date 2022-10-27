@@ -11,6 +11,7 @@ namespace RaqamliAvlod.Domain.Entities.ProblemSets
         public string Type { get; set; } = String.Empty;
         public string InputDescription { get; set; } = String.Empty;
         public string OutputDescription { get; set; } = String.Empty;
+        public string Note { get; set; } = String.Empty;
         public int TimeLimit { get; set; }
         public int MemoryLimit { get; set; }
         public byte Difficulty { get; set; }
