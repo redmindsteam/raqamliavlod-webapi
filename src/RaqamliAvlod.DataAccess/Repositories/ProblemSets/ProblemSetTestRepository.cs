@@ -11,9 +11,9 @@ namespace RaqamliAvlod.DataAccess.Repositories.ProblemSets
 
         }
 
-        public Task<IEnumerable<ProblemSetTest>> GetAllByProblemSetId(long problemSetId)
+        public async Task<IEnumerable<ProblemSetTest>> GetAllByProblemSetId(long problemSetId)
         {
-            throw new NotImplementedException();
+            return _dbSet.Where(problemSetTest => problemSetTest.ProblemSetId == problemSetId);
         }
     }
 }
