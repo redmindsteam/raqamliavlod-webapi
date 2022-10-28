@@ -4,11 +4,11 @@ using RaqamliAvlod.Application.ViewModels.Accounts.Commands;
 
 namespace RaqamliAvlod.Api.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/accounts")]
 [ApiController]
 public class AccountsController : ControllerBase
 {
-    [HttpPost("regstrate"), AllowAnonymous]
+    [HttpPost("registrate"), AllowAnonymous]
     public async Task<IActionResult> RegistrateAsync([FromForm] AccountCreateViewModel accountCreateViewModel)
         => Ok();
 

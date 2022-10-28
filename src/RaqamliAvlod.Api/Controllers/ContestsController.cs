@@ -2,10 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using RaqamliAvlod.Application.Utils;
 using RaqamliAvlod.Application.ViewModels.Contests.Commands;
+using RaqamliAvlod.Application.ViewModels.Submissions.Commands;
 #pragma warning disable
 namespace RaqamliAvlod.Api.Controllers;
 
-[Route("api/[controller]/")]
+[Route("api/contests")]
 [ApiController]
 public class ContestsController : ControllerBase
 {
@@ -16,79 +17,80 @@ public class ContestsController : ControllerBase
         return Ok();
     }
 
-    [HttpGet("{contestId}"), AllowAnonymous]
-    public async Task<IActionResult> GetAsync(long contestId)
+    [HttpGet("{id}"), AllowAnonymous]
+    public async Task<IActionResult> GetAsync(long id)
     {
         return Ok();
     }
 
     [HttpPost, Authorize(Roles = "User, Admin")]
-    public async Task<IActionResult> CreateAsync([FromForm] ContestCreateViewModel contestCreateViewModel)
+    public async Task<IActionResult> CreateAsync([FromBody] ContestCreateViewModel contestCreateViewModel)
     {
         return Ok();
     }
 
-    [HttpPut, Authorize(Roles = "User, Admin")]
-    public async Task<IActionResult> UpdateAsync([FromBody] ContestCreateViewModel contestUpdateViewModel)
+    [HttpPut("{id}"), Authorize(Roles = "User, Admin")]
+    public async Task<IActionResult> UpdateAsync(long id, [FromBody] ContestCreateViewModel contestUpdateViewModel)
     {
         return Ok();
     }
 
-    [HttpDelete("{contestId}"), Authorize(Roles = "Admin")]
-    public async Task<IActionResult> DeleteAsync(long contestId)
+    [HttpDelete("{id}"), Authorize(Roles = "Admin")]
+    public async Task<IActionResult> DeleteAsync(long id)
     {
         return Ok();
     }
 
-    [HttpPost("Registrate"), Authorize(Roles = "User, Admin")]
-    public async Task<IActionResult> RegistrateAsync()
+    [HttpPost("registrate"), Authorize(Roles = "User, Admin")]
+    public async Task<IActionResult> RegistrateAsync(long contestId)
     {
         return Ok();
     }
 
-    [HttpPost("Submissions"), Authorize(Roles = "User, Admin")]
-    public async Task<IActionResult> SubmissionsAsync()
+    [HttpPost("submissions"), Authorize(Roles = "User, Admin")]
+    public async Task<IActionResult> SubmissionsAsync([FromForm] ContestSubmissionCreateViewModel viewModel)
     {
         return Ok();
     }
 
-    [HttpPost("Standings"), Authorize(Roles = "User, Admin")]
+    [HttpPost("standings"), Authorize(Roles = "User, Admin")]
     public async Task<IActionResult> StandingsAsync(long contestId)
     {
         return Ok();
     }
 
-    [HttpGet("{contestId}/Submissions"), AllowAnonymous]
-    public async Task<IActionResult> SubmissionsAsync([FromQuery] PaginationParams @params, long contestId)
+    [HttpGet("{contestId}/submissions"), AllowAnonymous]
+    public async Task<IActionResult> GetAllSubmissionsAsync([FromQuery] PaginationParams @params, long contestId)
     {
         return Ok();
     }
 
-    [HttpGet("{contestId}/Submissions/{userId}")]
-    public async Task<IActionResult> SubmissionsAsync([FromQuery] PaginationParams @params, long contestId, long userId)
+    [HttpGet("{contestId}/users/{userId}/submissions")]
+    public async Task<IActionResult> GetSubmissionAsync([FromQuery] PaginationParams @params, 
+        long contestId, long userId)
     {
         return Ok();
     }
 
-    [HttpGet("{contestId}/ProblemSets")]
-    public async Task<IActionResult> ProblemSetsAsync([FromQuery] PaginationParams @params, long contestId)
+    [HttpGet("{contestId}/problemsets")]
+    public async Task<IActionResult> GetAllProblemSetsAsync([FromQuery] PaginationParams @params, long contestId)
     {
         return Ok();
     }
 
-    [HttpGet("{contestId}/ProblemSets/{problemSetId}")]
-    public async Task<IActionResult> ProblemSetsAsync(long contestId, long problemSetId)
+    [HttpGet("{contestId}/problemsets/{problemSetId}")]
+    public async Task<IActionResult> GetProblemSetAsync(long contestId, long problemSetId)
     {
         return Ok();
     }
 
-    [HttpGet("{contestId}/Participants")]
+    [HttpGet("{contestId}/participants")]
     public async Task<IActionResult> ParticipantsAsync([FromQuery] PaginationParams @params, long contestId)
     {
         return Ok();
     }
 
-    [HttpGet("{contestId}/Standings")]
+    [HttpGet("{contestId}/standings")]
     public async Task<IActionResult> StandingsAsync([FromQuery] PaginationParams @params, long contestId)
     {
         return Ok();
