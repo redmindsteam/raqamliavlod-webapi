@@ -5,7 +5,7 @@ using RaqamliAvlod.Application.ViewModels.Questions.Commands;
 #pragma warning disable
 namespace RaqamliAvlod.Api.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/questions")]
 [ApiController]
 public class QuestionsController : ControllerBase
 {
@@ -15,8 +15,8 @@ public class QuestionsController : ControllerBase
         return Ok();
     }
 
-    [HttpGet("{questionId}"), AllowAnonymous]
-    public async Task<IActionResult> GetAsync(long questionId)
+    [HttpGet("{id}"), AllowAnonymous]
+    public async Task<IActionResult> GetAsync(long id)
     {
         return Ok();
     }
@@ -27,14 +27,50 @@ public class QuestionsController : ControllerBase
         return Ok();
     }
 
-    [HttpPatch("{questionId}"), Authorize(Roles = "User, Admin")]
-    public async Task<IActionResult> UpdateAsync([FromBody] QuestionCreateViewModel questionUpdateViewModel)
+    [HttpPatch("{id}"), Authorize(Roles = "User, Admin")]
+    public async Task<IActionResult> UpdateAsync(long id, [FromBody] QuestionCreateViewModel questionUpdateViewModel)
     {
         return Ok();
     }
 
-    [HttpDelete("{questionId}"), Authorize(Roles = "User, Admin")]
+    [HttpDelete("{id}"), Authorize(Roles = "User, Admin")]
     public async Task<IActionResult> DeleteAsync(long id)
+    {
+        return Ok();
+    }
+
+    [HttpPost("{id}/views"), Authorize(Roles = "Admin")]
+    public async Task<IActionResult> CreateViewsAsync(long id)
+    {
+        return Ok();
+    }
+
+    [HttpPost("{id}/answers"), Authorize(Roles = "User, Admin")]
+    public async Task<IActionResult> CreateAnswerAsync(long id)
+    {
+        return Ok();
+    }
+
+    [HttpGet("answers/{answerId}"), AllowAnonymous]
+    public async Task<IActionResult> GetAnswerAsync(long answerId)
+    {
+        return Ok();
+    }
+
+    [HttpPut("answers/{answerId}"), Authorize(Roles = "User, Admin")]
+    public async Task<IActionResult> UpdateAnswerAsync(long answerId)
+    {
+        return Ok();
+    }
+
+    [HttpDelete("answers/{answerId}"), Authorize(Roles = "User, Admin")]
+    public async Task<IActionResult> DeleteAsnwerAsync(long answerId)
+    {
+        return Ok();
+    }
+
+    [HttpGet("search/{search}"), AllowAnonymous]
+    public async Task<IActionResult> GetSearchAsync(string search)
     {
         return Ok();
     }

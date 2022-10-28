@@ -5,7 +5,7 @@ using RaqamliAvlod.Application.ViewModels.Courses.Commands;
 #pragma warning disable
 namespace RaqamliAvlod.Api.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/courses")]
 [ApiController]
 public class CoursesController : ControllerBase
 {
@@ -15,8 +15,8 @@ public class CoursesController : ControllerBase
         return Ok();
     }
 
-    [HttpGet("{courseId}"), AllowAnonymous]
-    public async Task<IActionResult> GetAsync(long courseId)
+    [HttpGet("{id}"), AllowAnonymous]
+    public async Task<IActionResult> GetAsync(long id)
     {
         return Ok();
     }
@@ -27,32 +27,32 @@ public class CoursesController : ControllerBase
         return Ok();
     }
 
-    [HttpDelete("{courseId}"), Authorize(Roles = "Admin")]
-    public async Task<IActionResult> DeleteAsync(long courseId)
+    [HttpDelete("{id}"), Authorize(Roles = "Admin")]
+    public async Task<IActionResult> DeleteAsync(long id)
     {
         return Ok();
     }
 
-    [HttpPatch("{courseId}"), Authorize(Roles = "User, Admin")]
-    public async Task<IActionResult> UpdateAsync(long courseId, [FromForm] CourseCreateViewModel courseUpdateViewModel)
+    [HttpPatch("{id}"), Authorize(Roles = "User, Admin")]
+    public async Task<IActionResult> UpdateAsync(long id, [FromForm] CourseCreateViewModel courseUpdateViewModel)
     {
         return Ok();
     }
 
-    [HttpPost("{courseId}/Comments"), Authorize(Roles = "User, Admin")]
-    public async Task<IActionResult> CreateCommentAsync(long courseId, [FromBody] CourseCommentCreateViewModel courseCommentCreateViewModel)
+    [HttpPost("{id}/comments"), Authorize(Roles = "User, Admin")]
+    public async Task<IActionResult> CreateCommentAsync(long id, [FromBody] CourseCommentCreateViewModel courseCommentCreateViewModel)
     {
         return Ok();
     }
 
-    [HttpGet("{courseId}/Comments"), AllowAnonymous]
-    public async Task<IActionResult> GetAllCommentsAsync([FromQuery] PaginationParams @params, long courseId)
+    [HttpGet("{id}/comments"), AllowAnonymous]
+    public async Task<IActionResult> GetAllCommentsAsync([FromQuery] PaginationParams @params, long id)
     {
         return Ok();
     }
 
-    [HttpDelete("{courseId}/Comments/{commentId}"), Authorize(Roles = ("User, Admin"))]
-    public async Task<IActionResult> DeleteCommentAsync(long courseId, long commentId)
+    [HttpDelete("{id}/comments/{commentId}"), Authorize(Roles = ("User, Admin"))]
+    public async Task<IActionResult> DeleteCommentAsync(long id, long commentId)
     {
         return Ok();
     }
@@ -63,13 +63,13 @@ public class CoursesController : ControllerBase
         return Ok();
     }
 
-    [HttpPost("Videos"), AllowAnonymous]
+    [HttpPost("videos"), AllowAnonymous]
     public async Task<IActionResult> CreateCourseVideoAsync([FromForm] CourseVideoCreateViewModel courseVideoCreateViewModel)
     {
         return Ok();
     }
 
-    [HttpPatch("Videos"), AllowAnonymous]
+    [HttpPatch("videos"), AllowAnonymous]
     public async Task<IActionResult> UpdateCourseVideoAsync([FromForm] CourseVideoCreateViewModel courseVideoUpdateViewModel)
     {
         return Ok();
