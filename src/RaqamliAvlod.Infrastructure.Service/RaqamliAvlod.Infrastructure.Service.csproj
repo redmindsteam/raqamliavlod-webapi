@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentEmail.Smtp" Version="3.0.2" />
+    <PackageReference Include="MailKit" Version="3.4.2" />
+    <PackageReference Include="MimeKit" Version="3.4.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\RaqamliAvlod.Infrastructure.Core\RaqamliAvlod.Infrastructure.Core.csproj" />
   </ItemGroup>
 
