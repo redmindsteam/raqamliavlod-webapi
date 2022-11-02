@@ -1,5 +1,4 @@
 ﻿using CodePower.DataAccess.Common;
-using Microsoft.EntityFrameworkCore;
 using RaqamliAvlod.Application.Utils;
 using RaqamliAvlod.DataAccess.DbContexts;
 using RaqamliAvlod.DataAccess.Interfaces;
@@ -7,7 +6,8 @@ using RaqamliAvlod.Domain.Common;
 
 namespace RaqamliAvlod.DataAccess.Repositories
 {
-    public class GenericRepository<T> : BaseRepository<T>, IGenericRepository<T> where T : BaseEntity
+    public class GenericRepository<T> : BaseRepository<T>,
+        IGenericRepository<T> where T : BaseEntity
     {
         public GenericRepository(AppDbContext context) : base(context)
         {

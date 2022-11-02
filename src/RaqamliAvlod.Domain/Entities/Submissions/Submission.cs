@@ -12,6 +12,7 @@ namespace RaqamliAvlod.Domain.Entities.Submissions
         public int ExecutionTime { get; set; }
         public int MemoryUsage { get; set; }
         public int LengthOfCode { get; set; }
+        public string Code { get; set; } = String.Empty;
 
         public long UserId { get; set; }
         public virtual User User { get; set; } = null!;

@@ -11,5 +11,6 @@ namespace RaqamliAvlod.Domain.Entities.Contests
         public bool IsCompleted { get; set; }
         public bool IsPublic { get; set; }
         public DateTime UpdatedAt { get; set; }
+        public DateTime CalculatedDate { get; set; }
     }
 }

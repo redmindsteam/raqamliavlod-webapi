@@ -1,5 +1,5 @@
-using Microsoft.AspNetCore.Diagnostics;
 using RaqamliAvlod.Api.Configurations.Dependencies;
+using RaqamliAvlod.Api.Middlewares;
 
 //-> Services
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +17,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 app.UseMiddleware<ExceptionHandlerMiddleware>();
 app.UseCors("AllowAll");
 app.UseHttpsRedirection();

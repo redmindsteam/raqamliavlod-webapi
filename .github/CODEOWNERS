@@ -1,12 +1,13 @@
 # Github configs PR reviewer
-/.github/*                              @sodiqjonovich
-/assets/*                               @sodiqjonovich
-/src/*                                  @sodiqjonovich
+/.github/*                                      @sodiqjonovich
+/assets/*                                       @sodiqjonovich
+/src/*                                          @sodiqjonovich
 
-/src/RaqamliAvlod.Api/*                 @khayitmuradov
-/src/RaqamliAvlod.DataAccess/*          @Maxamadzoidov
-/src/RaqamliAvlod.Application/*         @AbdullayevAbbos
-/src/RaqamliAvlod.Domain/*              @akhadov
-/src/RaqamliAvlod.Service/*             @TemurbekUbaydullayev
+/src/RaqamliAvlod.Api/*                         @khayitmuradov
+/src/RaqamliAvlod.DataAccess/*                  @Maxamadzoidov
+/src/RaqamliAvlod.Application/*                 @AbdullayevAbbos
+/src/RaqamliAvlod.Domain/*                      @akhadov
+/src/RaqamliAvlod.Infrastructure.Core/*         @sodiqjonovich
+/src/RaqamliAvlod.Infrastructure.Service/*      @TemurbekUbaydullayev
 
-/test/*                                 @aslonboyev
+/test/*                                         @aslonboyev

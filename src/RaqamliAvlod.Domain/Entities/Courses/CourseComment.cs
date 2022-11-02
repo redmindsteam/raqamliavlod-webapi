@@ -11,6 +11,6 @@ namespace RaqamliAvlod.Domain.Entities.Courses
         public Course Course { get; set; } = null!;
 
         public long OwnerId { get; set; }
-        public virtual User User { get; set; } = null!;
+        public virtual User Owner { get; set; } = null!;
     }
 }

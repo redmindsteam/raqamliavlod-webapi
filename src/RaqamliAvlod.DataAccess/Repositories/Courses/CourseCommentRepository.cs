@@ -1,56 +1,22 @@
-﻿
+﻿using CodePower.DataAccess.Common;
+using RaqamliAvlod.Application.Utils;
 using RaqamliAvlod.DataAccess.DbContexts;
 using RaqamliAvlod.DataAccess.Interfaces.Courses;
 using RaqamliAvlod.Domain.Entities.Courses;
 
-
 namespace RaqamliAvlod.DataAccess.Repositories.Courses
 {
-    public class CourseCommentRepository : ICourseCommentRepository
+    public class CourseCommentRepository : BaseRepository<CourseComment>, ICourseCommentRepository
     {
-        private readonly AppDbContext _dbSet;
-
-        public CourseCommentRepository(AppDbContext context)
+        public CourseCommentRepository(AppDbContext context) : base(context)
         {
-            _dbSet = context;
-        }
-        public async Task<CourseComment> CreateAsync(CourseComment entity)
-        {
-            await _dbSet.CourseComments.AddAsync(entity);
-            await _dbSet.SaveChangesAsync();
-
-            return entity;
 
         }
-
-        public async Task<CourseComment> DeleteAsync(long id)
+        public async Task<PagedList<CourseComment>> GetAllByCourseIdAsync(long courseId, PaginationParams @params)
         {
-            var entity = await _dbSet.CourseComments.FindAsync(id);
-            if (entity is not null)
-            {
-                _dbSet.Remove(entity);
-                await _dbSet.SaveChangesAsync();
-                return entity;
-            }
-            else throw new NullReferenceException("Not found entity to remove");
-        }
+            var coursecomments = _dbSet.Where(courses => courses.CourseId == courseId);
 
-        public async Task<CourseComment?> FindByIdAsync(long id)
-        {
-            return await _dbSet.CourseComments.FindAsync(id);
-        }
-
-        public async Task<CourseComment> UpdateAsync(long id, CourseComment entity)
-        {
-            var oldEntity = await _dbSet.CourseComments.FindAsync(id);
-            if (oldEntity is not null)
-            {
-                entity.Id = id;
-                _dbSet.CourseComments.Update(entity);
-                await _dbSet.SaveChangesAsync();
-                return entity;
-            }
-            else throw new NullReferenceException("Not found entity to update");
+            return await PagedList<CourseComment>.ToPagedListAsync(coursecomments, @params.PageNumber, @params.PageSize);
         }
     }
 }

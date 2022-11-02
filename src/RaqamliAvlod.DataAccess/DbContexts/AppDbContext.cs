@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RaqamliAvlod.DataAccess.Configurations;
 using RaqamliAvlod.Domain.Entities.Contests;
 using RaqamliAvlod.Domain.Entities.Courses;
 using RaqamliAvlod.Domain.Entities.ProblemSets;
@@ -19,6 +18,7 @@ namespace RaqamliAvlod.DataAccess.DbContexts
 
         public virtual DbSet<Contest> Contests { get; set; } = null!;
         public virtual DbSet<ContestStandings> ContestStandings { get; set; } = null!;
+        public virtual DbSet<ContestSubmissionsInfo> ContestSubmissionsInfos { get; set; } = null!;
         public virtual DbSet<Course> Courses { get; set; } = null!;
         public virtual DbSet<CourseComment> CourseComments { get; set; } = null!;
         public virtual DbSet<CourseVideo> CourseVideos { get; set; } = null!;
@@ -26,12 +26,62 @@ namespace RaqamliAvlod.DataAccess.DbContexts
         public virtual DbSet<ProblemSetTest> ProblemSetTests { get; set; } = null!;
         public virtual DbSet<Question> Questions { get; set; } = null!;
         public virtual DbSet<QuestionAnswer> QuestionAnswers { get; set; } = null!;
+        public virtual DbSet<QuestionTag> QuestionTags { get; set; } = null!;
+        public virtual DbSet<Tag> Tags { get; set; } = null!;
         public virtual DbSet<Submission> Submissions { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new UserConfiguration());
+            base.OnModelCreating(modelBuilder);
+            #region Contests
+            modelBuilder.Entity<Contest>().HasIndex(x => x.Title).IsUnique();
+            modelBuilder.Entity<ContestStandings>().HasIndex(entity =>
+                new { entity.UserId, entity.ContestId }
+            ).IsUnique();
+            modelBuilder.Entity<ContestSubmissionsInfo>()
+                .HasIndex(entity => new { entity.ProblemSetId, entity.ContestStandingsId }
+            ).IsUnique();
+            #endregion
+
+            #region Courses
+            modelBuilder.Entity<CourseVideo>().HasIndex(entity =>
+                new
+                {
+                    entity.CourseId,
+                    entity.YouTubeLink
+                }).IsUnique();
+            #endregion
+
+            #region ProblemSets
+            modelBuilder.Entity<ProblemSet>().HasIndex(entity => entity.Name).IsUnique();
+            modelBuilder.Entity<ProblemSet>().HasIndex(entity => new
+            {
+                entity.ContestIdentifier,
+                entity.ContestId
+            }).IsUnique();
+
+            #endregion
+
+            #region Questions
+            modelBuilder.Entity<QuestionTag>().HasIndex(entity => new
+            {
+                entity.TagId,
+                entity.QuestionId
+            }).IsUnique();
+            #endregion
+
+            #region Tags
+            modelBuilder.Entity<Tag>().HasIndex(x => x.TagName).IsUnique();
+            #endregion
+
+            #region Users
+            modelBuilder.Entity<User>().HasIndex(x => x.Email).IsUnique();
+            modelBuilder.Entity<User>().HasIndex(x => x.PhoneNumber).IsUnique();
+            modelBuilder.Entity<User>().HasIndex(x => x.Username).IsUnique();
+            modelBuilder.Entity<User>().HasIndex(x => x.ImagePath).IsUnique();
+            modelBuilder.Entity<User>().HasIndex(x => x.Salt).IsUnique();
+            #endregion
         }
     }
 }

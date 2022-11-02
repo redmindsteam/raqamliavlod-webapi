@@ -12,7 +12,7 @@ namespace CodePower.DataAccess.Common
             MetaData = new PaginationMetaData(count, pageNumber, pageSize);
             AddRange(items);
         }
-        public async static Task<PagedList<T>> ToPagedListAsync(IQueryable<T> source, 
+        public async static Task<PagedList<T>> ToPagedListAsync(IQueryable<T> source,
             int pageNumber, int pageSize)
         {
             var count = await source.CountAsync();

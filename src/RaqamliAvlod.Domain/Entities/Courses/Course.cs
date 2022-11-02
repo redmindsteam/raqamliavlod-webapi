@@ -13,6 +13,6 @@ namespace RaqamliAvlod.Domain.Entities.Courses
         public DateTime UpdatedAt { get; set; }
 
         public long OwnerId { get; set; }
-        public virtual User? User { get; set; }
+        public virtual User? Owner { get; set; }
     }
 }

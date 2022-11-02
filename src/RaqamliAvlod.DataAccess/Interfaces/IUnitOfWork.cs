@@ -1,5 +1,4 @@
-﻿using RaqamliAvlod.DataAccess.DbContexts;
-using RaqamliAvlod.DataAccess.Interfaces.Contests;
+﻿using RaqamliAvlod.DataAccess.Interfaces.Contests;
 using RaqamliAvlod.DataAccess.Interfaces.Courses;
 using RaqamliAvlod.DataAccess.Interfaces.ProblemSets;
 using RaqamliAvlod.DataAccess.Interfaces.Questions;
@@ -20,6 +19,5 @@ namespace RaqamliAvlod.DataAccess.Interfaces
         public IQuestionRepository Questions { get; }
         public ISubmissionRepository Submissions { get; }
         public IUserRepository Users { get; }
-        public AppDbContext dbContext { get; }
     }
 }

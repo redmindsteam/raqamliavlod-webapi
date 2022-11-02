@@ -8,12 +8,11 @@ namespace RaqamliAvlod.DataAccess.Configurations
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.HasIndex(x => x.Email).IsUnique();
-            builder.HasIndex(x => x.PhoneNumber).IsUnique();
+            builder.HasIndex(user => user.Email).IsUnique();
+            builder.HasIndex(user => user.PhoneNumber).IsUnique();
             // create super admin
             // create admin
             // create user
-            throw new NotImplementedException();
         }
     }
 }

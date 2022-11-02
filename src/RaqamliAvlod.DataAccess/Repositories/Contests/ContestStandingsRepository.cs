@@ -1,42 +1,23 @@
-﻿using RaqamliAvlod.DataAccess.DbContexts;
+﻿using CodePower.DataAccess.Common;
+using RaqamliAvlod.Application.Utils;
+using RaqamliAvlod.DataAccess.DbContexts;
 using RaqamliAvlod.DataAccess.Interfaces.Contests;
 using RaqamliAvlod.Domain.Entities.Contests;
 
-
 namespace RaqamliAvlod.DataAccess.Repositories.Contests
 {
-    public class ContestStandingsRepository : IContestStandingsRepository
+    public class ContestStandingsRepository : BaseRepository<ContestStandings>, IContestStandingsRepository
     {
-        private readonly AppDbContext _dbSet;
-
-        public ContestStandingsRepository(AppDbContext context)
+        public ContestStandingsRepository(AppDbContext context) : base(context)
         {
-            _dbSet = context;
-        }
-        public async Task<ContestStandings> CreateAsync(ContestStandings entity)
-        {
-            await _dbSet.ContestStandings.AddAsync(entity);
-            await _dbSet.SaveChangesAsync();
 
-            return entity;
         }
 
-        public async Task<ContestStandings?> FindByIdAsync(long id)
+        public async Task<PagedList<ContestStandings>> GetAllByContestIdAsync(long contestId, PaginationParams @params)
         {
-            return await _dbSet.ContestStandings.FindAsync(id);
-        }
+            var contestStandings = _dbSet.Where(standings => standings.ContestId == contestId);
 
-        public async Task<ContestStandings> UpdateAsync(long id, ContestStandings entity)
-        {
-            var oldEntity = await _dbSet.ContestStandings.FindAsync(id);
-            if (oldEntity is not null)
-            {
-                entity.Id = id;
-                _dbSet.ContestStandings.Update(entity);
-                await _dbSet.SaveChangesAsync();
-                return entity;
-            }
-            else throw new NullReferenceException("Not found entity to update");
+            return await PagedList<ContestStandings>.ToPagedListAsync(contestStandings, @params.PageNumber, @params.PageSize);
         }
     }
 }
