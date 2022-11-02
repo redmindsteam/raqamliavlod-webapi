@@ -8,5 +8,6 @@ namespace RaqamliAvlod.Infrastructure.Service.Interfaces.Common
 {
     public interface IPaginatorService
     {
+
     }
 }

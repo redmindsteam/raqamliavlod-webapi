@@ -10,10 +10,4 @@
     <None Remove="Entities\Questions\Question.cs~RF1690a5e6.TMP" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="FluentEmail.Smtp" Version="3.0.2" />
-    <PackageReference Include="MailKit" Version="3.4.2" />
-    <PackageReference Include="MimeKit" Version="3.4.2" />
-  </ItemGroup>
-
 </Project>
