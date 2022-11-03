@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RaqamliAvlod.Application.Utils;
-using RaqamliAvlod.Application.ViewModels.Contests.Commands;
-using RaqamliAvlod.Application.ViewModels.ProblemSets.Commands;
-using RaqamliAvlod.Application.ViewModels.Submissions.Commands;
+using RaqamliAvlod.Infrastructure.Service.Dtos;
+
 namespace RaqamliAvlod.Api.Controllers;
 
 [Route("api/contests")]
@@ -23,13 +22,13 @@ public class ContestsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateAsync([FromBody] ContestCreateViewModel contestCreateViewModel)
+    public async Task<IActionResult> CreateAsync([FromBody] ContestCreateDto contestCreateViewModel)
     {
         return Ok();
     }
 
     [HttpPut("{contestId}")]
-    public async Task<IActionResult> UpdateAsync(long contestId, [FromBody] ContestCreateViewModel contestUpdateViewModel)
+    public async Task<IActionResult> UpdateAsync(long contestId, [FromBody] ContestCreateDto contestUpdateViewModel)
     {
         return Ok();
     }
@@ -47,13 +46,13 @@ public class ContestsController : ControllerBase
     }
 
     [HttpPost("submissions")]
-    public async Task<IActionResult> CreateSubmissionsAsync([FromForm] ContestSubmissionCreateViewModel viewModel)
+    public async Task<IActionResult> CreateSubmissionsAsync([FromForm] ContestSubmissionCreateDto viewModel)
     {
         return Ok();
     }
 
     [HttpPost("problemsets")]
-    public async Task<IActionResult> CreateProblemSetAsync([FromForm] ContestProblemSetCreateViewModel createViewModel)
+    public async Task<IActionResult> CreateProblemSetAsync([FromForm] ContestProblemSetCreateDto createViewModel)
     {
         return Ok();
     }
@@ -72,7 +71,7 @@ public class ContestsController : ControllerBase
 
     [HttpGet("{contestId}/users/{userId}/submissions")]
 
-    public async Task<IActionResult> GetSubmissionsAsync([FromQuery] PaginationParams @params, 
+    public async Task<IActionResult> GetSubmissionsAsync([FromQuery] PaginationParams @params,
         long contestId, long userId)
     {
         return Ok();

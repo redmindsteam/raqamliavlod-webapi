@@ -2,12 +2,6 @@
 using Newtonsoft.Json;
 using RaqamliAvlod.Application.Utils;
 using RaqamliAvlod.Infrastructure.Service.Interfaces.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RaqamliAvlod.Infrastructure.Service.Services.Common;
 
@@ -21,7 +15,7 @@ public class PaginatorServcie : IPaginatorService
     }
     public void ToPagenator(PaginationMetaData metaData)
     {
-        _accessor.HttpContext.Response.Headers.Add("X-Pagination", 
+        _accessor.HttpContext.Response.Headers.Add("X-Pagination",
             JsonConvert.SerializeObject(metaData));
     }
 }

@@ -1,10 +1,10 @@
-﻿using Microsoft.Extensions.Configuration;
-using RaqamliAvlod.Application.ViewModels.Common;
-using RaqamliAvlod.Infrastructure.Service.Interfaces.Common;
-using MimeKit;
-using MailKit.Net.Smtp;
-using MimeKit.Text;
+﻿using MailKit.Net.Smtp;
 using MailKit.Security;
+using Microsoft.Extensions.Configuration;
+using MimeKit;
+using MimeKit.Text;
+using RaqamliAvlod.Infrastructure.Service.Dtos;
+using RaqamliAvlod.Infrastructure.Service.Interfaces.Common;
 
 
 namespace RaqamliAvlod.Infrastructure.Service.Services.Common

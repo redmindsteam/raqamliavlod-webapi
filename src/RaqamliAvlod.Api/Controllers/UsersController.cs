@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RaqamliAvlod.Application.Utils;
-using RaqamliAvlod.Application.ViewModels.Users.Commands;
+using RaqamliAvlod.Infrastructure.Service.Dtos;
 
 namespace RaqamliAvlod.Api.Controllers;
 
@@ -21,7 +21,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpPut("{userId}")]
-    public async Task<IActionResult> UpdateAsync(long userId, [FromForm] UserUpdateViewModel userUpdateViewModel)
+    public async Task<IActionResult> UpdateAsync(long userId, [FromForm] UserUpdateDto userUpdateViewModel)
     {
         return Ok();
     }

@@ -9,7 +9,7 @@ namespace RaqamliAvlod.DataAccess.Repositories.Courses
     public class CourseVideoRepository : BaseRepository<CourseVideo>, ICourseVideoRepository
     {
         public CourseVideoRepository(AppDbContext context) : base(context)
-        {            
+        {
         }
         public async Task<PagedList<CourseVideo>> GetAllByCourseIdAsync(long courseId, PaginationParams @params)
         {

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 using RaqamliAvlod.Application.Exceptions;
-using RaqamliAvlod.Application.ViewModels.Common;
+using RaqamliAvlod.Infrastructure.Service.Dtos;
 
 namespace RaqamliAvlod.Api.Middlewares
 {
@@ -34,7 +34,7 @@ namespace RaqamliAvlod.Api.Middlewares
         public async Task ClientErrorHandleAsync(HttpContext httpContext, StatusCodeException exception)
         {
             httpContext.Response.ContentType = "application/json";
-            ErrorResponseViewModel result = new()
+            ErrorResponse result = new()
             {
                 Message = exception.Message,
                 StatusCode = (int)exception.HttpStatusCode
@@ -46,7 +46,7 @@ namespace RaqamliAvlod.Api.Middlewares
         public async Task SystemErrorHandleAsync(HttpContext httpContext, Exception exception)
         {
             httpContext.Response.ContentType = "application/json";
-            ErrorResponseViewModel result = new();
+            ErrorResponse result = new();
             if (_env.IsProduction())
             {
                 result.Message = exception.Message;

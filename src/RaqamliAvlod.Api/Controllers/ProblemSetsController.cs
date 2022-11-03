@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RaqamliAvlod.Application.Utils;
-using RaqamliAvlod.Application.ViewModels.ProblemSets.Commands;
-using RaqamliAvlod.Application.ViewModels.Submissions.Commands;
+using RaqamliAvlod.Infrastructure.Service.Dtos;
 
 namespace RaqamliAvlod.Api.Controllers;
 
@@ -22,13 +21,13 @@ public class ProblemSetsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateAsync([FromForm] ProblemSetCreateViewModel problemSetCreateViewModel)
+    public async Task<IActionResult> CreateAsync([FromForm] ProblemSetCreateDto problemSetCreateViewModel)
     {
         return Ok();
     }
 
     [HttpPut("{problemSetId}")]
-    public async Task<IActionResult> UpdateAsync(long problemSetId, [FromForm] ProblemSetCreateViewModel problemSetCreateViewModel)
+    public async Task<IActionResult> UpdateAsync(long problemSetId, [FromForm] ProblemSetCreateDto problemSetCreateViewModel)
     {
         return Ok();
     }
@@ -58,14 +57,14 @@ public class ProblemSetsController : ControllerBase
     }
 
     [HttpPost("tests")]
-    public async Task<IActionResult> CreateProblemSetsTestAsync([FromForm] ProblemSetTestCreateViewModel viewModel)
+    public async Task<IActionResult> CreateProblemSetsTestAsync([FromForm] ProblemSetTestCreateDto viewModel)
     {
         return Ok();
     }
 
     [HttpPut("tests/{testId}")]
     public async Task<IActionResult> UpdateProblemSetsTestAsync(long testId,
-        [FromForm] ProblemSetTestCreateViewModel problemSetTestCreateViewModel)
+        [FromForm] ProblemSetTestCreateDto problemSetTestCreateViewModel)
     {
         return Ok();
     }
@@ -77,7 +76,7 @@ public class ProblemSetsController : ControllerBase
     }
 
     [HttpPost("submissions")]
-    public async Task<IActionResult> CreateSubmissionAsync(ProblemSetSubmissionCreateViewModel viewModel)
+    public async Task<IActionResult> CreateSubmissionAsync(ProblemSetSubmissionCreateDto viewModel)
     {
         return Ok();
     }

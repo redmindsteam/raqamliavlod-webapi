@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RaqamliAvlod.Application.Utils;
-using RaqamliAvlod.Application.ViewModels.Questions.Commands;
+using RaqamliAvlod.Infrastructure.Service.Dtos;
 
 namespace RaqamliAvlod.Api.Controllers;
 
@@ -21,13 +21,13 @@ public class QuestionsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateAsync([FromForm] QuestionCreateViewModel questionCreateViewModel)
+    public async Task<IActionResult> CreateAsync([FromForm] QuestionCreateDto questionCreateViewModel)
     {
         return Ok();
     }
 
     [HttpPatch("{questionId}")]
-    public async Task<IActionResult> UpdateAsync(long questionId, [FromBody] QuestionCreateViewModel questionUpdateViewModel)
+    public async Task<IActionResult> UpdateAsync(long questionId, [FromBody] QuestionCreateDto questionUpdateViewModel)
     {
         return Ok();
     }

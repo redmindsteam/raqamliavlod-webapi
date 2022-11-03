@@ -7,11 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RaqamliAvlod.Domain\RaqamliAvlod.Domain.csproj" />
+    <Compile Remove="ViewModels\Accounts\Queries\**" />
+    <EmbeddedResource Remove="ViewModels\Accounts\Queries\**" />
+    <None Remove="ViewModels\Accounts\Queries\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModels\Accounts\Queries\" />
+    <ProjectReference Include="..\RaqamliAvlod.Domain\RaqamliAvlod.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

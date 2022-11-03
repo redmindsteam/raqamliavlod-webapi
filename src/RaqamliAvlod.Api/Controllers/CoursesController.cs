@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RaqamliAvlod.Application.Utils;
-using RaqamliAvlod.Application.ViewModels.Courses.Commands;
+using RaqamliAvlod.Infrastructure.Service.Dtos;
 
 namespace RaqamliAvlod.Api.Controllers;
 
@@ -21,7 +21,7 @@ public class CoursesController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateAsync([FromForm] CourseCreateViewModel courseCreateViewModel)
+    public async Task<IActionResult> CreateAsync([FromForm] CourseCreateDto courseCreateViewModel)
     {
         return Ok();
     }
@@ -33,13 +33,13 @@ public class CoursesController : ControllerBase
     }
 
     [HttpPatch("{courseId}")]
-    public async Task<IActionResult> UpdateAsync(long courseId, [FromForm] CourseCreateViewModel courseUpdateViewModel)
+    public async Task<IActionResult> UpdateAsync(long courseId, [FromForm] CourseCreateDto courseUpdateViewModel)
     {
         return Ok();
     }
 
     [HttpPost("{courseId}/comments")]
-    public async Task<IActionResult> CreateCommentAsync(long courseId, [FromBody] CourseCommentCreateViewModel courseCommentCreateViewModel)
+    public async Task<IActionResult> CreateCommentAsync(long courseId, [FromBody] CourseCommentCreateDto courseCommentCreateViewModel)
     {
         return Ok();
     }
@@ -69,7 +69,7 @@ public class CoursesController : ControllerBase
     }
 
     [HttpPost("videos")]
-    public async Task<IActionResult> CreateCourseVideoAsync([FromForm] CourseVideoCreateViewModel courseVideoCreateViewModel)
+    public async Task<IActionResult> CreateCourseVideoAsync([FromForm] CourseVideoCreateDto courseVideoCreateViewModel)
     {
         return Ok();
     }

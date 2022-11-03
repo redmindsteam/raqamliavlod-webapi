@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace RaqamliAvlod.DataAccess.Repositories.Courses
+﻿namespace RaqamliAvlod.DataAccess.Repositories.Courses
 {
     public class CourseViewRepository
     {
