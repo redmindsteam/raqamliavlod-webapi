@@ -32,6 +32,8 @@ public class CourseCommentService : ICourseCommentService
         if (user is null)
             throw new StatusCodeException(HttpStatusCode.BadRequest, "Owner not found!");
         var courseComment = (CourseComment)dto;
+        courseComment.Owner = user;
+
 
         var res = await _unitOfWork.CourseComments.CreateAsync(courseComment);
 
