@@ -10,6 +10,7 @@ namespace RaqamliAvlod.Api.Controllers;
 public class CoursesController : ControllerBase
 {
     private readonly ICourseService _courseService;
+    private readonly ICourseCommentService _courseCommentService;
 
     public CoursesController(ICourseService courseService)
     {
@@ -40,6 +41,7 @@ public class CoursesController : ControllerBase
     public async Task<IActionResult> CreateCommentAsync(long courseId, 
         [FromBody] CourseCommentCreateDto courseCommentCreateViewModel)
     {
+
         return Ok();
     }
 
