@@ -15,7 +15,7 @@ public class AccountsController : ControllerBase
         _accountService = accountService;
     }
 
-    [HttpPost("registrate"), AllowAnonymous]
+    [HttpPost("register"), AllowAnonymous]
     public async Task<IActionResult> RegistrateAsync([FromForm] AccountCreateDto accountCreateViewModel)
         => Ok(await _accountService.RegisterAsync(accountCreateViewModel));
 

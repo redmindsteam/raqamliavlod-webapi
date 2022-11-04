@@ -2,6 +2,7 @@
 using RaqamliAvlod.Application.Utils;
 using RaqamliAvlod.Infrastructure.Service.Dtos;
 using RaqamliAvlod.Infrastructure.Service.Interfaces.Courses;
+using RaqamliAvlod.Infrastructure.Service.Services.Courses;
 
 namespace RaqamliAvlod.Api.Controllers;
 
@@ -12,9 +13,10 @@ public class CoursesController : ControllerBase
     private readonly ICourseService _courseService;
     private readonly ICourseCommentService _courseCommentService;
 
-    public CoursesController(ICourseService courseService)
+    public CoursesController(ICourseService courseService, CourseCommentService courseCommentService)
     {
         _courseService = courseService;
+        _courseCommentService = courseCommentService;
     }
     [HttpGet]
     public async Task<IActionResult> GetAllAsync([FromQuery] PaginationParams @params, string searchText)
@@ -50,11 +52,8 @@ public class CoursesController : ControllerBase
     }
 
     [HttpPost("{courseId}/comments")]
-    public async Task<IActionResult> CreateCommentAsync(long courseId, [FromBody] CourseCommentCreateDto courseCommentCreateViewModel)
-    {
-
-        return Ok();
-    }
+    public async Task<IActionResult> CreateCommentAsync(long courseId,long ownerId, [FromBody] CourseCommentCreateDto courseCommentCreateViewModel)
+        => Ok(await _courseCommentService.CreateAsync(ownerId,courseCommentCreateViewModel));
 
     [HttpGet("{courseId}/comments")]
     public async Task<IActionResult> GetAllCommentsAsync([FromQuery] PaginationParams @params, long courseId)
