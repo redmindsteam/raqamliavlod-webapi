@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+ </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Controllers\CoursesController.cs~RF3a1a3ea.TMP" />

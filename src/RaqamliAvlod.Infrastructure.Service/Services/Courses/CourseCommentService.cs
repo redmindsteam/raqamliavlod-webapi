@@ -47,7 +47,7 @@ public class CourseCommentService : ICourseCommentService
     public async Task<bool> DeleteAsync( long id)
     {
 
-        var courseComment = _unitOfWork.Courses.FindByIdAsync(id);
+        var courseComment = _unitOfWork.CourseComments.FindByIdAsync(id);
 
         if (courseComment is null)
             throw new StatusCodeException(HttpStatusCode.BadRequest, "Comment not found!");
@@ -68,7 +68,7 @@ public class CourseCommentService : ICourseCommentService
             var owner  = (await _unitOfWork.Users.FindByIdAsync(courseComment.OwnerId))!;
 
             var courseCommentView = (CourseCommentViewModel)courseComment;
-            courseCommentView.Username = owner.Username;
+            courseCommentView.Username = owner.Username!;
 
             courseCommentViews.Add(courseCommentView);
         }
@@ -90,7 +90,7 @@ public class CourseCommentService : ICourseCommentService
 
         var courseCommentView = (CourseCommentViewModel)courseComment;
 
-        courseCommentView.Username = owner.Username;
+        courseCommentView.Username = owner.Username!;
 
         return courseCommentView;
     }
@@ -100,7 +100,7 @@ public class CourseCommentService : ICourseCommentService
         var courseComment = await _unitOfWork.CourseComments.FindByIdAsync(courseCommentId);
 
         if (courseComment is null)
-            throw new StatusCodeException(HttpStatusCode.BadRequest, "Course not found!");
+            throw new StatusCodeException(HttpStatusCode.BadRequest, "Comment not found!");
 
         courseComment.CommentText = dto.CommentText;
 
