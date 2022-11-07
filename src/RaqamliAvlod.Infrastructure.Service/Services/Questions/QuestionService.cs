@@ -20,7 +20,7 @@ public class QuestionService : IQuestionService
     }
     public async Task<bool> CreateAsync(long userId, QuestionCreateDto dto)
     {
-        var user = await _unitOfWork.Questions.FindByIdAsync(userId);
+        var user = await _unitOfWork.Users.FindByIdAsync(userId);
 
         if (user is null)
         {

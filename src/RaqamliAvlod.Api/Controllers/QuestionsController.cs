@@ -33,7 +33,7 @@ public class QuestionsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateAsync(long userId, [FromForm] QuestionCreateDto questionCreateViewModel)
+    public async Task<IActionResult> CreateAsync([FromQuery]long userId, [FromForm] QuestionCreateDto questionCreateViewModel)
     {
         var result = await _questionService.CreateAsync(userId, questionCreateViewModel);
 
