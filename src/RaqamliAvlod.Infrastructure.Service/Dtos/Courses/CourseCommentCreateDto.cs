@@ -8,14 +8,14 @@ namespace RaqamliAvlod.Infrastructure.Service.Dtos
         [Required, MinLength(3)]
         public string CommentText { get; set; } = string.Empty;
         [Required]
-        public long CourseId { get; set; }
+        public long OwnerId { get; set; }
 
         public static implicit operator CourseComment(CourseCommentCreateDto courseCommentCreateDto)
         {
             return new CourseComment()
             {
                 CommentText = courseCommentCreateDto.CommentText,
-                CourseId = courseCommentCreateDto.CourseId,
+                OwnerId = courseCommentCreateDto.OwnerId,
             };
         }
 

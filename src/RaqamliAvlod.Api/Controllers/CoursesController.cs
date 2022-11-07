@@ -2,6 +2,7 @@
 using RaqamliAvlod.Application.Utils;
 using RaqamliAvlod.Infrastructure.Service.Dtos;
 using RaqamliAvlod.Infrastructure.Service.Interfaces.Courses;
+using RaqamliAvlod.Infrastructure.Service.Services.Courses;
 
 namespace RaqamliAvlod.Api.Controllers;
 
@@ -12,9 +13,10 @@ public class CoursesController : ControllerBase
     private readonly ICourseService _courseService;
     private readonly ICourseCommentService _courseCommentService;
 
-    public CoursesController(ICourseService courseService)
+    public CoursesController(ICourseService courseService, CourseCommentService courseCommentService)
     {
         _courseService = courseService;
+        _courseCommentService = courseCommentService;
     }
 
     [HttpPost]
@@ -38,22 +40,20 @@ public class CoursesController : ControllerBase
         => Ok(await _courseService.DeleteAsync(courseId));
 
     [HttpPost("{courseId}/comments")]
-    public async Task<IActionResult> CreateCommentAsync(long courseId, 
-        [FromBody] CourseCommentCreateDto courseCommentCreateViewModel)
-    {
-
-        return Ok();
-    }
+    public async Task<IActionResult> CreateCommentAsync(long courseId, [FromBody] CourseCommentCreateDto courseCommentCreateViewModel)
+        => Ok(await _courseCommentService.CreateAsync(courseId,courseCommentCreateViewModel));
 
     [HttpGet("{courseId}/comments")]
     public async Task<IActionResult> GetAllCommentsAsync([FromQuery] PaginationParams @params, long courseId)
     {
+        var result =  await _courseCommentService.GetAllByCourseIdAsync(courseId,@params);
         return Ok();
     }
 
     [HttpDelete("{courseId}/comments/{commentId}")]
     public async Task<IActionResult> DeleteCommentAsync(long courseId, long commentId)
     {
+        var result = await _courseCommentService.DeleteAsync(commentId);
         return Ok();
     }
 

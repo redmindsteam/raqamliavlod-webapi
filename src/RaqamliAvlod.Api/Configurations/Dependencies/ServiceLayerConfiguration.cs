@@ -21,8 +21,12 @@ namespace RaqamliAvlod.Api.Configurations.Dependencies
             builder.Services.AddScoped<IEmailService, EmailService>();
             builder.Services.AddScoped<IAuthManager, AuthManager>();
             builder.Services.AddScoped<IAccountService, AccountService>();
+<<<<<<< HEAD
             builder.Services.AddScoped<IIdentityHelperService, IdentityHelperService>();
             builder.Services.AddScoped<IQuestionService, QuestionService>();
+=======
+            builder.Services.AddScoped<ICourseCommentService, CourseCommentService>();
+>>>>>>> e5600fc (CourseComment conntroller)
             builder.Services.AddMemoryCache();
         }
     }

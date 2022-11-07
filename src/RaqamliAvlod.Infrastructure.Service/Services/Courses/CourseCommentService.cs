@@ -25,13 +25,18 @@ public class CourseCommentService : ICourseCommentService
     {
         _unitOfWork = unitOfWork;
     }
-    public async Task<bool> CreateAsync(long ownerId, CourseCommentCreateDto dto)
+    public async Task<bool> CreateAsync(long courseId, CourseCommentCreateDto dto)
     {
-        var user = await _unitOfWork.Users.FindByIdAsync(ownerId);
-
+        var user = await _unitOfWork.Users.FindByIdAsync(dto.OwnerId);
+        var course = await _unitOfWork.Courses.FindByIdAsync(courseId);
         if (user is null)
             throw new StatusCodeException(HttpStatusCode.BadRequest, "Owner not found!");
+        if (course is null)
+            throw new StatusCodeException(HttpStatusCode.BadRequest, "Course not found!");
+        
         var courseComment = (CourseComment)dto;
+        courseComment.Owner = user;
+        courseComment.Course = course;
 
         var res = await _unitOfWork.CourseComments.CreateAsync(courseComment);
 
@@ -39,12 +44,13 @@ public class CourseCommentService : ICourseCommentService
 
     }
 
-    public async Task<bool> DeleteAsync(long id)
+    public async Task<bool> DeleteAsync( long id)
     {
+
         var courseComment = _unitOfWork.Courses.FindByIdAsync(id);
 
         if (courseComment is null)
-            throw new StatusCodeException(HttpStatusCode.BadRequest, "Course comment not found!");
+            throw new StatusCodeException(HttpStatusCode.BadRequest, "Comment not found!");
 
         var res = await _unitOfWork.CourseComments.DeleteAsync(id);
 
