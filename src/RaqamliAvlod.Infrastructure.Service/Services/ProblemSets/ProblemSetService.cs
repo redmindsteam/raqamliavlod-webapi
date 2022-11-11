@@ -3,6 +3,7 @@ using RaqamliAvlod.Application.Utils;
 using RaqamliAvlod.Application.ViewModels.ProblemSets;
 using RaqamliAvlod.DataAccess.Interfaces;
 using RaqamliAvlod.Domain.Entities.ProblemSets;
+using RaqamliAvlod.Domain.Enums;
 using RaqamliAvlod.Infrastructure.Service.Dtos;
 using RaqamliAvlod.Infrastructure.Service.Interfaces.Common;
 using RaqamliAvlod.Infrastructure.Service.Interfaces.ProblemSets;
@@ -28,6 +29,9 @@ namespace RaqamliAvlod.Infrastructure.Service.Services.ProblemSets
 
             var ownerUser = await _unitOfWork.Users.FindByIdAsync(createDto.OwnerId);
             if (ownerUser is null) throw new StatusCodeException(HttpStatusCode.NotFound, $"Owner is not known. Owner id = {createDto.OwnerId} is not valid");
+
+            if (ownerUser.Role != UserRole.Admin || ownerUser.Role != UserRole.SuperAdmin)
+                throw new StatusCodeException(HttpStatusCode.BadRequest, "This user can't create problem set");
 
             var problemSet = (ProblemSet)createDto;
             problemSet.ContestIdentifier = 'A';
