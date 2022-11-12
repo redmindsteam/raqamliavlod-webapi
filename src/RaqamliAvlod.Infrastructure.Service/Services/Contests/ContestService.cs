@@ -22,14 +22,16 @@ namespace RaqamliAvlod.Infrastructure.Service.Services.Contests
             _paginatorService = paginatorService;
         }
 
-        public async Task<bool> CreateAsync(ContestCreateDto contestCreateDto)
+        public async Task<bool> CreateAsync(ContestCreateDto dto)
         {
-            var oldContest = await _unitOfWork.Contests.GetByTitleAsync(contestCreateDto.Title);
+            var oldContest = await _unitOfWork.Contests.GetByTitleAsync(dto.Title);
             if (oldContest is not null) throw new StatusCodeException(HttpStatusCode.BadRequest, $"There is alredy exist title named by {oldContest.Title}");
 
-            var contest = (Contest)contestCreateDto;
+            var contest = (Contest)dto;
             contest.CreatedAt = TimeHelper.GetCurrentDateTime();
             contest.UpdatedAt = TimeHelper.GetCurrentDateTime();
+            contest.StartDate = dto.StartDate.Kind == DateTimeKind.Utc ? dto.StartDate : dto.StartDate.ToUniversalTime().AddHours(5);
+            contest.EndDate = dto.EndDate.Kind == DateTimeKind.Utc ? dto.EndDate : dto.EndDate.ToUniversalTime().AddHours(5);
             //DateTime date1 = contestCreateDto.StartDate;
             //DateTime date2 = contestCreateDto.EndDate;
             //TimeSpan ts = date2 - date1;
@@ -45,7 +47,7 @@ namespace RaqamliAvlod.Infrastructure.Service.Services.Contests
 
             await _unitOfWork.Contests.DeleteAsync(contestId);
 
-            return true;    
+            return true;
         }
 
         public async Task<IEnumerable<ContestViewModel>> GetAllAsync(PaginationParams @params)

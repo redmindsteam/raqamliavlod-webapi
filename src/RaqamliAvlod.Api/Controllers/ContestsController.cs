@@ -25,7 +25,7 @@ public class ContestsController : ControllerBase
         => Ok(await _contestService.GetAsync(contestId));
 
     [HttpPost]
-    public async Task<IActionResult> CreateAsync([FromForm] ContestCreateDto contestCreateViewModel)
+    public async Task<IActionResult> CreateAsync([FromBody] ContestCreateDto contestCreateViewModel)
         => Ok(await _contestService.CreateAsync(contestCreateViewModel));
 
     [HttpPut("{contestId}")]
