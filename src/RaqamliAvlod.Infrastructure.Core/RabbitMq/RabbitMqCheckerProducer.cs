@@ -1,6 +1,9 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RaqamliAvlod.Infrastructure.Core.Interfaces.Shared;
+using RaqamliAvlod.Infrastructure.Core.Models;
+using System.Text;
 
 #pragma warning disable
 namespace RaqamliAvlod.Infrastructure.Core.RabbitMQ
@@ -35,6 +38,17 @@ namespace RaqamliAvlod.Infrastructure.Core.RabbitMQ
                                     autoDelete: false,
                                     arguments: null);
             _channel.BasicQos(prefetchSize: 0, prefetchCount: 1, global: false);
+        }
+
+        public void Send(CheckerSubmissionRequest request)
+        {
+            string json = JsonConvert.SerializeObject(request);
+
+            var body = Encoding.UTF8.GetBytes(json);
+            _channel.BasicPublish(exchange: "",
+                                routingKey: _queueName,
+                                basicProperties: null,
+                                body: body);
         }
     }
 }

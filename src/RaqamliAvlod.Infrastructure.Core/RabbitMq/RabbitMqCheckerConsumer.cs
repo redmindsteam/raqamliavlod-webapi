@@ -1,13 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using RaqamliAvlod.Domain.Entities.Submissions;
 using Serilog;
 using System.Text;
-
+#pragma warning disable
 namespace RaqamliAvlod.Infrastructure.Core.RabbitMQ
 {
     public class RabbitMqCheckerConsumer : BackgroundService
