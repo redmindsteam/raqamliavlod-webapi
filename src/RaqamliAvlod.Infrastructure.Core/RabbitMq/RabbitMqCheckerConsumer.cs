@@ -1,7 +1,12 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using RaqamliAvlod.Domain.Entities.Submissions;
+using RaqamliAvlod.Infrastructure.Core.Interfaces.Managers;
+using RaqamliAvlod.Infrastructure.Core.Models;
 using Serilog;
 using System.Text;
 #pragma warning disable
@@ -42,18 +47,23 @@ namespace RaqamliAvlod.Infrastructure.Core.RabbitMQ
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             var consumer = new EventingBasicConsumer(_channel);
-            consumer.Received += Receive_Handle;
+            consumer.Received += ReceiveHandle;
             _channel.BasicConsume(_queueName, false, consumer);
         }
 
-        private void Receive_Handle(object sender, BasicDeliverEventArgs model)
+        private void ReceiveHandle(object sender, BasicDeliverEventArgs model)
         {
             try
             {
                 var body = model.Body;
                 string json = Encoding.UTF8.GetString(body.ToArray());
                 Log.Error("Rabbit2->Received /n" + json);
-                
+                var response = JsonConvert.DeserializeObject<CheckerSubmissionResponse>(json);
+                using (IServiceScope scope = _serviceProvider.CreateScope())
+                {
+                    var _manager = scope.ServiceProvider.GetRequiredService<ICheckerManager>();
+                    _manager.ReceiveAsync(response).RunSynchronously();
+                }
             }
             catch (Exception error)
             {
