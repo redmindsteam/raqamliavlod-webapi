@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using RaqamliAvlod.Application.Measurers;
 using RaqamliAvlod.DataAccess.Interfaces;
 using RaqamliAvlod.Infrastructure.Core.Interfaces.Managers;
 using RaqamliAvlod.Infrastructure.Core.Interfaces.Shared;
@@ -19,9 +20,20 @@ namespace RaqamliAvlod.Infrastructure.Core.Managers
             this._unitOfWork = unitOfWork;
         }
 
-        public async Task ReceiveAsync(CheckerSubmissionResponse submissionResponse)
+        public async Task ReceiveAsync(CheckerSubmissionResponse response)
         {
-            throw new NotImplementedException();
+            if (response.IsSuccessfull!)
+                await _unitOfWork.Submissions.DeleteAsync(response.SummissionId);
+            else
+            {
+                var submission = await _unitOfWork.Submissions.FindByIdAsync(response.SummissionId);
+                if (submission is null) return;
+                submission.Result = response.Result;
+                submission.MemoryUsage = (int)((response.MemoryUsages.Values.Count == 0) ? 0 : response.MemoryUsages.Values.Max());
+                submission.ExecutionTime = (int)((response.ProcessingTimes.Values.Count == 0) ? 0 : response.ProcessingTimes.Values.Max());
+                await _unitOfWork.Submissions.UpdateAsync(submission.Id, submission);
+
+            }
         }
 
         public async Task SendAsync(CheckerSubmissionDetails submissionDetails)
