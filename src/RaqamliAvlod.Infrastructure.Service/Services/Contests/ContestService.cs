@@ -1,8 +1,10 @@
 ﻿using RaqamliAvlod.Application.Exceptions;
 using RaqamliAvlod.Application.Utils;
 using RaqamliAvlod.Application.ViewModels.Contests;
+using RaqamliAvlod.Application.ViewModels.Users;
 using RaqamliAvlod.DataAccess.Interfaces;
 using RaqamliAvlod.Domain.Entities.Contests;
+using RaqamliAvlod.Domain.Entities.ProblemSets;
 using RaqamliAvlod.Infrastructure.Service.Dtos;
 using RaqamliAvlod.Infrastructure.Service.Helpers;
 using RaqamliAvlod.Infrastructure.Service.Interfaces.Common;
@@ -11,7 +13,7 @@ using System.Net;
 
 namespace RaqamliAvlod.Infrastructure.Service.Services.Contests
 {
-    public class ContestService : IContestService
+    public class ContestService :  IContestService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IPaginatorService _paginatorService;
@@ -30,12 +32,21 @@ namespace RaqamliAvlod.Infrastructure.Service.Services.Contests
             var contest = (Contest)contestCreateDto;
             contest.CreatedAt = TimeHelper.GetCurrentDateTime();
             contest.UpdatedAt = TimeHelper.GetCurrentDateTime();
-            //DateTime date1 = contestCreateDto.StartDate;
-            //DateTime date2 = contestCreateDto.EndDate;
-            //TimeSpan ts = date2 - date1;
-            //contest.CalculatedDate = Convert.ToDateTime(ts.ToString());
+
             await _unitOfWork.Contests.CreateAsync(contest);
             return true;
+        }
+
+        public async Task<bool> CreateProblemSetAsync(ContestProblemSetCreateDto setCreateDto)
+        {
+            var oldProblemSet = await _unitOfWork.ProblemSets.FindByNameAsync(setCreateDto.Name);
+            if (oldProblemSet is not null) throw new StatusCodeException(HttpStatusCode.BadRequest, message: $"There is alredy exist problemset named by {setCreateDto.Name}");
+
+            var problemSet = (ProblemSet)setCreateDto;
+
+            await _unitOfWork.ProblemSets.CreateAsync(problemSet);
+
+            return true;    
         }
 
         public async Task<bool> DeleteAsync(long contestId)
@@ -71,6 +82,23 @@ namespace RaqamliAvlod.Infrastructure.Service.Services.Contests
             if (contest is null) throw new StatusCodeException(HttpStatusCode.NotFound, "Contest is not found");
 
             return (ContestViewModel)contest;
+        }
+
+        public async Task<bool> RegisterAsync(long contestId, long userId)
+        {
+            var contest = await _unitOfWork.Contests.FindByIdAsync(contestId);
+            if (contest is null) throw new StatusCodeException(HttpStatusCode.NotFound, message: "This contest does not exist");
+
+            ContestStandings cs = new ContestStandings() 
+            { 
+                ContestId = contestId,
+                UserId = userId,
+                CreatedAt = TimeHelper.GetCurrentDateTime()
+            };
+
+            await _unitOfWork.ContestStandings.CreateAsync(cs);
+            return true;
+
         }
 
         public async Task<bool> UpdateAsync(long courseId, ContestCreateDto createDto)
