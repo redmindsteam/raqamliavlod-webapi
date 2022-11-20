@@ -31,33 +31,18 @@ namespace RaqamliAvlod.Infrastructure.Service.Services.Users
         
         public async Task<string> LogInAsync(AccountLoginDto accountLogin)
         {
-            if(accountLogin.EmailOrUsername.Contains('@'))
-            {
-                var user = await _unitOfWork.Users.GetByEmailAsync(accountLogin.EmailOrUsername.ToLower().Trim());
+            var user = accountLogin.EmailOrUsername.Contains('@') ?
+                  await _unitOfWork.Users.GetByEmailAsync(accountLogin.EmailOrUsername.ToLower().Trim())
+                : await _unitOfWork.Users.GetByUsernameAsync(accountLogin.EmailOrUsername.Trim());
 
-                if (user is null) throw new StatusCodeException(HttpStatusCode.NotFound, message: "email is wrong");
+            if (user is null) throw new StatusCodeException(HttpStatusCode.NotFound, message: "Email or Username is wrong");
 
-                if (user.EmailConfirmed is false)
-                    throw new StatusCodeException(HttpStatusCode.BadRequest, message: "email did not verified");
+            if (user.EmailConfirmed is false)
+                throw new StatusCodeException(HttpStatusCode.BadRequest, message: "email did not verified");
 
-                if (PasswordHasher.Verify(accountLogin.Password, user.Salt, user.PasswordHash))
-                    return _authManager.GenerateToken(user);
-                else throw new StatusCodeException(HttpStatusCode.BadRequest, message: "password is wrong");
-            }
-            else
-            {
-                var user = await _unitOfWork.Users.GetByUsernameAsync(accountLogin.EmailOrUsername);
-
-                if (user is null) throw new StatusCodeException(HttpStatusCode.NotFound, message: "username is wrong");
-
-                if (user.EmailConfirmed is false)
-                    throw new StatusCodeException(HttpStatusCode.BadRequest, message: "email did not verified");
-
-                if (PasswordHasher.Verify(accountLogin.Password, user.Salt, user.PasswordHash))
-                    return _authManager.GenerateToken(user);
-                else throw new StatusCodeException(HttpStatusCode.BadRequest, message: "password is wrong");
-            }
-            
+            if (PasswordHasher.Verify(accountLogin.Password, user.Salt, user.PasswordHash))
+                return _authManager.GenerateToken(user);
+            else throw new StatusCodeException(HttpStatusCode.BadRequest, message: "password is wrong");
         }
 
         public async Task<bool> RegisterAsync(AccountCreateDto accountCreate)
