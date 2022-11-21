@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RaqamliAvlod.Application.Utils;
 using RaqamliAvlod.Infrastructure.Service.Dtos;
+using RaqamliAvlod.Infrastructure.Service.Interfaces.Common;
 using RaqamliAvlod.Infrastructure.Service.Interfaces.Contests;
 
 namespace RaqamliAvlod.Api.Controllers;
@@ -10,10 +11,12 @@ namespace RaqamliAvlod.Api.Controllers;
 public class ContestsController : ControllerBase
 {
     private readonly IContestService _contestService;
+    private readonly IIdentityHelperService _identityHelper;
 
-    public ContestsController(IContestService contestService)
+    public ContestsController(IContestService contestService, IIdentityHelperService service)
     {
         _contestService = contestService;
+        _identityHelper = service;
     }
 
     [HttpGet]
@@ -36,11 +39,9 @@ public class ContestsController : ControllerBase
     public async Task<IActionResult> DeleteAsync(long contestId)
         => Ok(await _contestService.DeleteAsync(contestId));
 
-    [HttpPost("register")]
+    [HttpPost("{contestId}/register")]
     public async Task<IActionResult> RegistrateAsync(long contestId)
-    {
-        return Ok();
-    }
+       => Ok(await _contestService.RegisterAsync(contestId, _identityHelper.GetUserId() ?? 0));
 
     [HttpPost("submissions")]
     public async Task<IActionResult> CreateSubmissionsAsync([FromForm] ContestSubmissionCreateDto viewModel)
@@ -50,9 +51,7 @@ public class ContestsController : ControllerBase
 
     [HttpPost("problemsets")]
     public async Task<IActionResult> CreateProblemSetAsync([FromForm] ContestProblemSetCreateDto createViewModel)
-    {
-        return Ok();
-    }
+        => Ok(await _contestService.CreateProblemSetAsync(createViewModel));
 
     [HttpPost("standings/calculate")]
     public async Task<IActionResult> StandingsAsync(long contestId)
