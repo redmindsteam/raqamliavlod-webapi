@@ -5,11 +5,11 @@ using RaqamliAvlod.Infrastructure.Service.Interfaces.Common;
 
 namespace RaqamliAvlod.Infrastructure.Service.Services.Common;
 
-public class PaginatorServcie : IPaginatorService
+public class PaginatorService : IPaginatorService
 {
     private readonly IHttpContextAccessor _accessor;
 
-    public PaginatorServcie(IHttpContextAccessor accessor)
+    public PaginatorService(IHttpContextAccessor accessor)
     {
         _accessor = accessor;
     }
