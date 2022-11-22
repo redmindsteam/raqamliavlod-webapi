@@ -44,6 +44,7 @@ namespace RaqamliAvlod.Infrastructure.Core.RabbitMQ
                                     arguments: null);
             _channel.BasicQos(prefetchSize: 0, prefetchCount: 1, global: false);
         }
+        
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             var consumer = new EventingBasicConsumer(_channel);
