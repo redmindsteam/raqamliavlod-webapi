@@ -28,11 +28,11 @@ public class ContestsController : ControllerBase
         => Ok(await _contestService.GetAsync(contestId));
 
     [HttpPost]
-    public async Task<IActionResult> CreateAsync([FromForm] ContestCreateDto contestCreateViewModel)
+    public async Task<IActionResult> CreateAsync([FromBody] ContestCreateDto contestCreateViewModel)
         => Ok(await _contestService.CreateAsync(contestCreateViewModel));
 
     [HttpPut("{contestId}")]
-    public async Task<IActionResult> UpdateAsync(long contestId, [FromForm] ContestCreateDto contestUpdateViewModel)
+    public async Task<IActionResult> UpdateAsync(long contestId, [FromBody] ContestCreateDto contestUpdateViewModel)
         => Ok(await _contestService.UpdateAsync(contestId, contestUpdateViewModel));
 
     [HttpDelete("{contestId}")]

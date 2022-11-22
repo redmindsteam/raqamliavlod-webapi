@@ -54,4 +54,12 @@ public class UsersController : ControllerBase
     {
         return Ok();
     }
+
+    [HttpGet("{salom}")]
+    public async Task<IActionResult> GetR()
+    {
+        int i = 2;
+        if (i == 1) return Ok();
+        else return Unauthorized();
+    }
 }
