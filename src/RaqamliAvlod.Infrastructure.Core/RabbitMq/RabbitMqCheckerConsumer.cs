@@ -4,6 +4,7 @@ using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using RaqamliAvlod.Domain.Constants;
 using RaqamliAvlod.Domain.Entities.Submissions;
 using RaqamliAvlod.Infrastructure.Core.Interfaces.Managers;
 using RaqamliAvlod.Infrastructure.Core.Models;
@@ -63,7 +64,10 @@ namespace RaqamliAvlod.Infrastructure.Core.RabbitMQ
                 using (IServiceScope scope = _serviceProvider.CreateScope())
                 {
                     var _manager = scope.ServiceProvider.GetRequiredService<ICheckerManager>();
-                    _manager.ReceiveAsync(response).RunSynchronously();
+                    if (response.AppIdentifier == AppConstants.APPLICATION_IDENTIFIER)
+                        _manager.ReceiveAsync(response).RunSynchronously();
+                    else
+                        Log.Warning("There is unknown data from Rabbit2");
                 }
             }
             catch (Exception error)
