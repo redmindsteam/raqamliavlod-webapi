@@ -22,7 +22,7 @@ namespace RaqamliAvlod.Infrastructure.Core.Managers
 
         public async Task ReceiveAsync(CheckerSubmissionResponse response)
         {
-            if (response.IsSuccessfull!)
+            if (response.IsSuccessfull is false)
                 await _unitOfWork.Submissions.DeleteAsync(response.SummissionId);
             else
             {
@@ -32,7 +32,6 @@ namespace RaqamliAvlod.Infrastructure.Core.Managers
                 submission.MemoryUsage = (int)((response.MemoryUsages.Values.Count == 0) ? 0 : response.MemoryUsages.Values.Max());
                 submission.ExecutionTime = (int)((response.ProcessingTimes.Values.Count == 0) ? 0 : response.ProcessingTimes.Values.Max());
                 await _unitOfWork.Submissions.UpdateAsync(submission.Id, submission);
-
             }
         }
 

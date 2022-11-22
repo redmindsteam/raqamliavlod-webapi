@@ -2,12 +2,13 @@
 {
     public class ResourceConstants
     {
+        // Measure : extension
         public readonly static string[] ALLOWED_IMAGE_EXTENSIONS = new string[]
         {
             ".jpg", ".jpeg", ".png"
         };
 
-        // Mesaure : MB
+        // Measure : MB
         public const int MAX_AVATAR_SIZE = 2;
     }
 }
