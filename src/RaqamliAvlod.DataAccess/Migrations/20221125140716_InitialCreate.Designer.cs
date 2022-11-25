@@ -12,8 +12,8 @@ using RaqamliAvlod.DataAccess.DbContexts;
 namespace RaqamliAvlod.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221111064743_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20221125140716_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,69 +28,85 @@ namespace RaqamliAvlod.DataAccess.Migrations
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<DateTime>("CalculatedDate")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<DateTime>("CalculatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("calculated_at");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("description");
 
                     b.Property<DateTime>("EndDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("end_date");
 
-                    b.Property<bool>("IsCompleted")
-                        .HasColumnType("boolean");
+                    b.Property<bool>("IsCalculated")
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_calculated");
 
                     b.Property<bool>("IsPublic")
-                        .HasColumnType("boolean");
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_public");
 
                     b.Property<DateTime>("StartDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("start_date");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("title");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
 
                     b.HasKey("Id");
 
                     b.HasIndex("Title")
                         .IsUnique();
 
-                    b.ToTable("Contests");
+                    b.ToTable("contests");
                 });
 
-            modelBuilder.Entity("RaqamliAvlod.Domain.Entities.Contests.ContestStandings", b =>
+            modelBuilder.Entity("RaqamliAvlod.Domain.Entities.Contests.ContestStanding", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<long>("ContestId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("contest_id");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
 
                     b.Property<int>("Penalty")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("penalty");
 
                     b.Property<int>("ResultCoins")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("result_coins");
 
                     b.Property<long>("UserId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("user_id");
 
                     b.HasKey("Id");
 
@@ -99,105 +115,125 @@ namespace RaqamliAvlod.DataAccess.Migrations
                     b.HasIndex("UserId", "ContestId")
                         .IsUnique();
 
-                    b.ToTable("ContestStandings");
+                    b.ToTable("contest_standings");
                 });
 
-            modelBuilder.Entity("RaqamliAvlod.Domain.Entities.Contests.ContestSubmissionsInfo", b =>
+            modelBuilder.Entity("RaqamliAvlod.Domain.Entities.Contests.ContestStandingDetail", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<long>("ContestStandingsId")
-                        .HasColumnType("bigint");
+                    b.Property<long>("ContestStandingId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("contest_standing_id");
 
                     b.Property<TimeOnly>("FixedTime")
-                        .HasColumnType("time without time zone");
+                        .HasColumnType("time without time zone")
+                        .HasColumnName("fixed_time");
 
                     b.Property<bool>("IsFixed")
-                        .HasColumnType("boolean");
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_fixed");
 
                     b.Property<short>("PenaltySubmissions")
-                        .HasColumnType("smallint");
+                        .HasColumnType("smallint")
+                        .HasColumnName("penalty_submissions");
 
                     b.Property<long>("ProblemSetId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("problemset_id");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ContestStandingsId");
+                    b.HasIndex("ContestStandingId");
 
-                    b.HasIndex("ProblemSetId", "ContestStandingsId")
+                    b.HasIndex("ProblemSetId", "ContestStandingId")
                         .IsUnique();
 
-                    b.ToTable("ContestSubmissionsInfos");
+                    b.ToTable("contest_standing_details");
                 });
 
             modelBuilder.Entity("RaqamliAvlod.Domain.Entities.Courses.Course", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
 
                     b.Property<string>("ImagePath")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("image_path");
 
                     b.Property<string>("Info")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("info");
 
                     b.Property<long>("OwnerId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("owner_id");
 
                     b.Property<float>("Price")
-                        .HasColumnType("real");
+                        .HasColumnType("real")
+                        .HasColumnName("price");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("title");
 
                     b.Property<string>("Type")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("type");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
 
                     b.HasKey("Id");
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("Courses");
+                    b.ToTable("courses");
                 });
 
             modelBuilder.Entity("RaqamliAvlod.Domain.Entities.Courses.CourseComment", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<string>("CommentText")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("comment_text");
 
                     b.Property<long>("CourseId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("course_id");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
 
                     b.Property<long>("OwnerId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("owner_id");
 
                     b.HasKey("Id");
 
@@ -205,112 +241,137 @@ namespace RaqamliAvlod.DataAccess.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("CourseComments");
+                    b.ToTable("course_comments");
                 });
 
             modelBuilder.Entity("RaqamliAvlod.Domain.Entities.Courses.CourseVideo", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<long>("CourseId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("course_id");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("description");
 
                     b.Property<string>("Duration")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("duration");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("title");
 
                     b.Property<int>("ViewCount")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("view_count");
 
                     b.Property<string>("YouTubeLink")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("youtube_link");
 
                     b.Property<string>("YouTubeThumbnail")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("youtube_thumb");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CourseId", "YouTubeLink")
                         .IsUnique();
 
-                    b.ToTable("CourseVideos");
+                    b.ToTable("course_videos");
                 });
 
             modelBuilder.Entity("RaqamliAvlod.Domain.Entities.ProblemSets.ProblemSet", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<short>("ContestCoins")
-                        .HasColumnType("smallint");
+                        .HasColumnType("smallint")
+                        .HasColumnName("contest_coins");
 
-                    b.Property<long?>("ContestId")
-                        .HasColumnType("bigint");
+                    b.Property<long>("ContestId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("contest_id");
 
                     b.Property<char>("ContestIdentifier")
-                        .HasColumnType("character(1)");
+                        .HasColumnType("character(1)")
+                        .HasColumnName("contest_identifier");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("description");
 
                     b.Property<short>("Difficulty")
-                        .HasColumnType("smallint");
+                        .HasColumnType("smallint")
+                        .HasColumnName("difficulty");
 
                     b.Property<string>("InputDescription")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("input_desciption");
 
                     b.Property<bool>("IsPublic")
-                        .HasColumnType("boolean");
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_public");
 
                     b.Property<int>("MemoryLimit")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("memory_limit");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("name");
 
                     b.Property<string>("Note")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("note");
 
                     b.Property<string>("OutputDescription")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("output_desciption");
 
                     b.Property<long>("OwnerId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("owner_id");
 
                     b.Property<int>("TimeLimit")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("time_limit");
 
                     b.Property<string>("Type")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("type");
 
                     b.HasKey("Id");
 
@@ -324,93 +385,110 @@ namespace RaqamliAvlod.DataAccess.Migrations
                     b.HasIndex("ContestIdentifier", "ContestId")
                         .IsUnique();
 
-                    b.ToTable("ProblemSets");
+                    b.ToTable("problemsets");
                 });
 
             modelBuilder.Entity("RaqamliAvlod.Domain.Entities.ProblemSets.ProblemSetTest", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Input")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("input");
 
                     b.Property<string>("Output")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("output");
 
                     b.Property<long>("ProblemSetId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("problemset_id");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ProblemSetId");
 
-                    b.ToTable("ProblemSetTests");
+                    b.ToTable("problemset_tests");
                 });
 
             modelBuilder.Entity("RaqamliAvlod.Domain.Entities.Questions.Question", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("description");
 
                     b.Property<long>("OwnerId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("owner_id");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("title");
 
                     b.Property<int>("ViewCount")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("view_count");
 
                     b.HasKey("Id");
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("Questions");
+                    b.ToTable("questions");
                 });
 
             modelBuilder.Entity("RaqamliAvlod.Domain.Entities.Questions.QuestionAnswer", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("description");
 
                     b.Property<bool>("HasReplied")
-                        .HasColumnType("boolean");
+                        .HasColumnType("boolean")
+                        .HasColumnName("has_replied");
 
                     b.Property<long>("OwnerId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("owner_id");
 
                     b.Property<long?>("ParentId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("parent_id");
 
                     b.Property<long>("QuestionId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("question_id");
 
                     b.HasKey("Id");
 
@@ -420,22 +498,25 @@ namespace RaqamliAvlod.DataAccess.Migrations
 
                     b.HasIndex("QuestionId");
 
-                    b.ToTable("QuestionAnswers");
+                    b.ToTable("qestion_answers");
                 });
 
             modelBuilder.Entity("RaqamliAvlod.Domain.Entities.Questions.QuestionTag", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<long>("QuestionId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("question_id");
 
                     b.Property<long>("TagId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("tag_id");
 
                     b.HasKey("Id");
 
@@ -444,37 +525,41 @@ namespace RaqamliAvlod.DataAccess.Migrations
                     b.HasIndex("TagId", "QuestionId")
                         .IsUnique();
 
-                    b.ToTable("QuestionTags");
+                    b.ToTable("question_tags");
                 });
 
             modelBuilder.Entity("RaqamliAvlod.Domain.Entities.Questions.Tag", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<string>("TagName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("tag");
 
                     b.Property<int>("ViewCount")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("view_count");
 
                     b.HasKey("Id");
 
                     b.HasIndex("TagName")
                         .IsUnique();
 
-                    b.ToTable("Tags");
+                    b.ToTable("tags");
                 });
 
             modelBuilder.Entity("RaqamliAvlod.Domain.Entities.Submissions.Submission", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
@@ -486,7 +571,8 @@ namespace RaqamliAvlod.DataAccess.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
 
                     b.Property<int>("ExecutionTime")
                         .HasColumnType("integer");
@@ -519,65 +605,80 @@ namespace RaqamliAvlod.DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Submissions");
+                    b.ToTable("submissions");
                 });
 
             modelBuilder.Entity("RaqamliAvlod.Domain.Entities.Users.User", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<int>("ContestCoins")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("contest_coins");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("email");
 
                     b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("boolean");
+                        .HasColumnType("boolean")
+                        .HasColumnName("email_confirmed");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("first_name");
 
                     b.Property<string>("ImagePath")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("image_path");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("last_name");
 
                     b.Property<string>("PasswordHash")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("password_hash");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("phone_number");
 
                     b.Property<int>("ProblemSetCoins")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("problemset_coins");
 
                     b.Property<int>("Role")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("role");
 
                     b.Property<string>("Salt")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("salt");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
 
                     b.Property<string>("Username")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("username");
 
                     b.HasKey("Id");
 
@@ -590,10 +691,10 @@ namespace RaqamliAvlod.DataAccess.Migrations
                     b.HasIndex("Username")
                         .IsUnique();
 
-                    b.ToTable("Users");
+                    b.ToTable("users");
                 });
 
-            modelBuilder.Entity("RaqamliAvlod.Domain.Entities.Contests.ContestStandings", b =>
+            modelBuilder.Entity("RaqamliAvlod.Domain.Entities.Contests.ContestStanding", b =>
                 {
                     b.HasOne("RaqamliAvlod.Domain.Entities.Contests.Contest", "Contest")
                         .WithMany()
@@ -612,11 +713,11 @@ namespace RaqamliAvlod.DataAccess.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("RaqamliAvlod.Domain.Entities.Contests.ContestSubmissionsInfo", b =>
+            modelBuilder.Entity("RaqamliAvlod.Domain.Entities.Contests.ContestStandingDetail", b =>
                 {
-                    b.HasOne("RaqamliAvlod.Domain.Entities.Contests.ContestStandings", "ContestStandings")
+                    b.HasOne("RaqamliAvlod.Domain.Entities.Contests.ContestStanding", "ContestStanding")
                         .WithMany()
-                        .HasForeignKey("ContestStandingsId")
+                        .HasForeignKey("ContestStandingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -626,7 +727,7 @@ namespace RaqamliAvlod.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ContestStandings");
+                    b.Navigation("ContestStanding");
 
                     b.Navigation("ProblemSet");
                 });
@@ -676,7 +777,9 @@ namespace RaqamliAvlod.DataAccess.Migrations
                 {
                     b.HasOne("RaqamliAvlod.Domain.Entities.Contests.Contest", "Contest")
                         .WithMany()
-                        .HasForeignKey("ContestId");
+                        .HasForeignKey("ContestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("RaqamliAvlod.Domain.Entities.Users.User", "Owner")
                         .WithMany()

@@ -11,7 +11,7 @@ namespace RaqamliAvlod.DataAccess.Interfaces
     {
         public IContestRepository Contests { get; }
         public IContestStandingsRepository ContestStandings { get; }
-        public IContestSubmissionInfoRepository ContestSubmissionInfo { get; }
+        public IContestStandingDetailRepository ContestStandingDetails { get; }
         public ICourseCommentRepository CourseComments { get; }
         public ICourseRepository Courses { get; }
         public ICourseVideoRepository CourseVideos { get; }

@@ -2,9 +2,11 @@
 using RaqamliAvlod.Domain.Entities.Contests;
 using RaqamliAvlod.Domain.Entities.ProblemSets;
 using RaqamliAvlod.Domain.Entities.Users;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RaqamliAvlod.Domain.Entities.Submissions
 {
+    [Table("submissions")]
     public class Submission : Auditable
     {
         public string Result { get; set; } = String.Empty;

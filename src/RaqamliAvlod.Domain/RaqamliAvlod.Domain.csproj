@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Entities\Contests\Contest.cs~RF179625.TMP" />
     <None Remove="Entities\Questions\Question.cs~RF1690a5e6.TMP" />
   </ItemGroup>
 

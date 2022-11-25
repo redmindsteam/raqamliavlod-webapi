@@ -6,18 +6,18 @@ using RaqamliAvlod.Domain.Entities.Contests;
 
 namespace RaqamliAvlod.DataAccess.Repositories.Contests
 {
-    public class ContestSubmissionInfoRepository : BaseRepository<ContestSubmissionsInfo>, IContestSubmissionInfoRepository
+    public class ContestStandingDetailRepository : BaseRepository<ContestStandingDetail>, IContestStandingDetailRepository
     {
-        public ContestSubmissionInfoRepository(AppDbContext context) : base(context)
+        public ContestStandingDetailRepository(AppDbContext context) : base(context)
         {
         }
 
-        public async Task<PagedList<ContestSubmissionsInfo>> GetAllByContestIdAsync(long contestId, PaginationParams @params)
+        public async Task<PagedList<ContestStandingDetail>> GetAllByContestIdAsync(long contestId, PaginationParams @params)
         {
-            var submissionInfo = _dbSet.Where(info => info.ContestStandingsId == contestId)
+            var submissionInfo = _dbSet.Where(info => info.ContestStandingId == contestId)
                 .OrderBy(x => x.Id);
 
-            return await PagedList<ContestSubmissionsInfo>.ToPagedListAsync(submissionInfo,
+            return await PagedList<ContestStandingDetail>.ToPagedListAsync(submissionInfo,
                 @params.PageNumber, @params.PageSize);
         }
     }

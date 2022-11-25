@@ -4,8 +4,8 @@ using RaqamliAvlod.Domain.Entities.Contests;
 
 namespace RaqamliAvlod.DataAccess.Interfaces.Contests
 {
-    public interface IContestSubmissionInfoRepository : IRepository<ContestSubmissionsInfo>
+    public interface IContestStandingDetailRepository : IRepository<ContestStandingDetail>
     {
-        public Task<PagedList<ContestSubmissionsInfo>> GetAllByContestIdAsync(long contestId, PaginationParams @params);
+        public Task<PagedList<ContestStandingDetail>> GetAllByContestIdAsync(long contestId, PaginationParams @params);
     }
 }

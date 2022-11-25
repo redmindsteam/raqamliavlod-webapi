@@ -10,7 +10,7 @@ namespace RaqamliAvlod.Application.ViewModels.Contests
         public string Username { get; set; } = string.Empty;
         public string ContestName { get; set; } = string.Empty;
 
-        public static implicit operator ContestStandingsViewModel(ContestStandings contest)
+        public static implicit operator ContestStandingsViewModel(ContestStanding contest)
         {
             return new ContestStandingsViewModel()
             {

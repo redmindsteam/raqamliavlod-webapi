@@ -17,8 +17,8 @@ namespace RaqamliAvlod.DataAccess.DbContexts
         }
 
         public virtual DbSet<Contest> Contests { get; set; } = null!;
-        public virtual DbSet<ContestStandings> ContestStandings { get; set; } = null!;
-        public virtual DbSet<ContestSubmissionsInfo> ContestSubmissionsInfos { get; set; } = null!;
+        public virtual DbSet<ContestStanding> ContestStandings { get; set; } = null!;
+        public virtual DbSet<ContestStandingDetail> ContestSubmissionsInfos { get; set; } = null!;
         public virtual DbSet<Course> Courses { get; set; } = null!;
         public virtual DbSet<CourseComment> CourseComments { get; set; } = null!;
         public virtual DbSet<CourseVideo> CourseVideos { get; set; } = null!;
@@ -37,11 +37,11 @@ namespace RaqamliAvlod.DataAccess.DbContexts
             
             #region Contests
             modelBuilder.Entity<Contest>().HasIndex(x => x.Title).IsUnique();
-            modelBuilder.Entity<ContestStandings>().HasIndex(entity =>
+            modelBuilder.Entity<ContestStanding>().HasIndex(entity =>
                 new { entity.UserId, entity.ContestId }
             ).IsUnique();
-            modelBuilder.Entity<ContestSubmissionsInfo>()
-                .HasIndex(entity => new { entity.ProblemSetId, entity.ContestStandingsId }
+            modelBuilder.Entity<ContestStandingDetail>()
+                .HasIndex(entity => new { entity.ProblemSetId, entity.ContestStandingId }
             ).IsUnique();
             #endregion
 

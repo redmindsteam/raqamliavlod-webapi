@@ -19,7 +19,7 @@ namespace RaqamliAvlod.DataAccess.Repositories
     {
         public IContestRepository Contests { get; }
         public IContestStandingsRepository ContestStandings { get; }
-        public IContestSubmissionInfoRepository ContestSubmissionInfo { get; }
+        public IContestStandingDetailRepository ContestStandingDetails { get; }
         public ICourseCommentRepository CourseComments { get; }
         public ICourseRepository Courses { get; }
         public ICourseVideoRepository CourseVideos { get; }
@@ -36,7 +36,7 @@ namespace RaqamliAvlod.DataAccess.Repositories
         {
             Contests = new ContestRepository(appDbContext);
             ContestStandings = new ContestStandingsRepository(appDbContext);
-            ContestSubmissionInfo = new ContestSubmissionInfoRepository(appDbContext);
+            ContestStandingDetails = new ContestStandingDetailRepository(appDbContext);
             Courses = new CourseRepository(appDbContext);
             CourseComments = new CourseCommentRepository(appDbContext);
             CourseVideos = new CourseVideoRepository(appDbContext);

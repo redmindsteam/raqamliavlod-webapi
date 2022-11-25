@@ -22,7 +22,7 @@ namespace RaqamliAvlod.Application.ViewModels.Contests
                 Description = contest.Description,
                 StartDate = contest.StartDate,
                 EndDate = contest.EndDate,
-                IsCompleted = contest.IsCompleted,
+                IsCompleted = contest.IsCalculated,
                 IsPublic = contest.IsPublic
             };
         }

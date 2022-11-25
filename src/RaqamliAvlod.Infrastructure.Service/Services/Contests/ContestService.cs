@@ -89,7 +89,7 @@ namespace RaqamliAvlod.Infrastructure.Service.Services.Contests
             var contest = await _unitOfWork.Contests.FindByIdAsync(contestId);
             if (contest is null) throw new StatusCodeException(HttpStatusCode.NotFound, message: "This contest does not exist");
 
-            ContestStandings cs = new ContestStandings() 
+            ContestStanding cs = new ContestStanding() 
             { 
                 ContestId = contestId,
                 UserId = userId,
