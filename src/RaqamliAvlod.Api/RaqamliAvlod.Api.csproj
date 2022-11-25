@@ -27,9 +27,4 @@
     <ProjectReference Include="..\RaqamliAvlod.Infrastructure.Service\RaqamliAvlod.Infrastructure.Service.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\admin\" />
-    <Folder Include="Controllers\public\" />
-  </ItemGroup>
-
 </Project>
